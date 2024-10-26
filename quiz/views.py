@@ -52,3 +52,5 @@ def send_answers_to_admin(email, name, surname, answers):
 
     # Отправка на ваш личный email
     send_mail(subject, message, settings.EMAIL_HOST_USER, ['imp17487@gmail.com'])
+def home(request):
+    return render(request, 'base.html')  # Убедитесь, что у вас есть шаблон home.html
