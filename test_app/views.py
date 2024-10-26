@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Test, Question
+from .models import Test, Question, TestResult
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -7,8 +7,6 @@ def send_result_email(email, name, surname, score):
     subject = 'Результаты теста'
     message = f'Привет, {name} {surname}!\nВы набрали {score} баллов в тесте.'
     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
-
-from .models import Test, Question, TestResult  # Добавим TestResult
 
 def take_test(request, test_id):
     test = get_object_or_404(Test, id=test_id)
@@ -36,13 +34,12 @@ def take_test(request, test_id):
             score=score
         )
 
-        # Отправляем email (или можно сделать это опционально)
+        # Отправляем email с результатами
         send_answers_to_admin(email, name, surname, answers)
-
+        
         return render(request, 'quiz/thank_you.html', {'score': score})
 
     return render(request, 'quiz/take_test.html', {'test': test, 'questions': questions})
-
 
 def send_answers_to_admin(email, name, surname, answers):
     subject = 'Ответы пользователя на тест'
@@ -52,5 +49,6 @@ def send_answers_to_admin(email, name, surname, answers):
 
     # Отправка на ваш личный email
     send_mail(subject, message, settings.EMAIL_HOST_USER, ['imp17487@gmail.com'])
+
 def home(request):
-    return render(request, 'take_test.html')  # Убедитесь, что у вас есть шаблон home.html
+    return render(request, 'take_test.html')  # Убедитесь, что у вас есть шаблон index.html

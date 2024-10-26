@@ -18,9 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
-
 urlpatterns = [
+    path('', views.home, name='home'),  # Добавляем корневой маршрут
     path('admin/', admin.site.urls),
-    path('quiz/', include('quiz.urls')),
-    path('<int:test_id>/', views.take_test, name='take_test')
+    path('quiz/', include('quiz.urls')),  # Предположим, у вас есть отдельные URL для тестов
+    path('<int:test_id>/', views.take_test, name='take_test'),  # Ваш существующий маршрут для тестов
 ]
