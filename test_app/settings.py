@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,10 +55,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'test_app.urls'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # Эта строка указывает Django искать шаблоны в папке 'templates'
+        'DIRS': [os.path.join(BASE_DIR, 'quiz/templates')],  # Эта строка указывает Django искать шаблоны в папке 'templates'
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

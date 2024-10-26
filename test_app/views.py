@@ -51,4 +51,4 @@ def send_answers_to_admin(email, name, surname, answers):
     send_mail(subject, message, settings.EMAIL_HOST_USER, ['imp17487@gmail.com'])
 
 def home(request):
-    return render(request, 'take_test.html')  # Убедитесь, что у вас есть шаблон index.html
+    return render(request, 'quiz/take_test.html')  # Убедитесь, что у вас есть шаблон index.html
