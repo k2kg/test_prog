@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Прохождение теста{% endblock %}
+
+{% block content %}
+    <h1>{{ test.title }}</h1>
+    <p>{{ test.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="question-section">
+            {% for question in questions %}
+                <div class="question">
+                    <p><strong>{{ question.text }}</strong></p>
+                    <input type="text" name="answer_{{ question.id }}" placeholder="Ваш ответ">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="user-info-section">
+            <h3>Ваши данные</h3>
+            <input type="text" name="name" placeholder="Имя" required>
+            <input type="text" name="surname" placeholder="Фамилия" required>
+            <input type="email" name="email" placeholder="Электронная почта" required>
+        </div>
+
+        <button type="submit">Завершить тест и отправить</button>
+    </form>
+{% endblock %}
