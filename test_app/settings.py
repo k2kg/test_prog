@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
      # другие установленные приложения
     'quiz',
-    'test_app'
+    'test_app',
 ]
 
 MIDDLEWARE = [
